@@ -1,1 +1,21 @@
-/.metadata/
+# STS / Eclipse 관련
+.metadata/
+Servers/
+.settings/
+.classpath
+.project
+.springBeans
+
+# Maven 관련
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# 공통 Java 산출물
+*.class
+*.jar
+*.war
+*.ear
