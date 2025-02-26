@@ -37,10 +37,15 @@
 					<c:forEach items="${list}" var="board">
 						<tr>
 							<td><c:out value="${board.bno}" /></td>
-							<td><c:out value="${board.title}" /></td>
+							<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
+							<c:out value="${board.title}"/></a></td>
+							
 							<td><c:out value="${board.writer}" /></td>
+							
+							
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${board.regdate}" /></td>
+							
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}" /></td>
 						</tr>
 					</c:forEach>
@@ -88,9 +93,11 @@ $(document).ready(function(){
 	 
 	checkModal(result);
 	
+	history.replaceState({}, null, null);
+	
 	function checkModal(result){
 		
-		if(result===''){
+		if(result==='' || history.state){
 			console.log("result가 빈 값이므로 모달 실행 안됨.");
 			return;
 		}
