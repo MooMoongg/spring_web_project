@@ -18,7 +18,7 @@
 
 					<div class="form-group">
 						<label>Text area</label>
-						<textarea class="form-control" rows="3" name='content' ><c:out value="${board.content}" /></textarea>
+						<textarea class="form-control" rows="3" name='content' ><c:out value="${board.content}"/></textarea>
 					</div>
 
 					<div class="form-group">
@@ -28,12 +28,12 @@
 					
 					<div class="form-group">
 						<label>RegDate</label>
-						<input class="form-control" name='regDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value= "${board.regdate}" />' readonly="readonly">
+						<input class="form-control" name='regDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value="${board.regdate}"/>' readonly="readonly">
 					</div>
 					
 					<div class="form-group">
 						<label>Update Date</label>
-						<input class="form-control" name='updateDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value= "${board.updateDate}" />' readonly="readonly">
+						<input class="form-control" name='updateDate' value='<fmt:formatDate pattern="yyyy/MM/dd" value= "${board.updateDate}"/>' readonly="readonly">
 					</div>
 					
 					
@@ -44,3 +44,30 @@
 
 </form>
 <%@include file="../includes/footer.jsp"%>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	var formObj = $("form");
+	
+	$('button').on("click", function(e){
+		
+		e.preventDefault();
+		
+		var operation = $(this).data("oper");
+		
+		console.log(operation);
+		
+		if(operation ==='remove'){
+			formObj.attr("action", "/board/remove");
+		}else if(operation === 'list'){
+			//move to list
+			self.location="/board/list";
+			return;
+		}
+		formObj.submit();
+
+		});
+});
+</script>

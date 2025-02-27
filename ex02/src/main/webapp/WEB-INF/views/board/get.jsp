@@ -41,8 +41,14 @@
 					</div>
 					
 					
-					<button data-oper='modify' class="btn btn-default" onClick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
-					<button data-oper='list' class="btn btn-info" onClick="location.href='/board/list'">List</button>
+					<button data-oper='modify' class="btn btn-default">Modify</button>
+					<button data-oper='list' class="btn btn-info">List</button>
+					
+					<form id='operForm' action="/board/modify" method="get">
+						<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+					</form>
+					
+				
 
 			</div>
 			<!-- end panel-body -->
