@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 import org.zerock.mapper.BoardMapper;
 
 import lombok.Setter;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
 
 
@@ -30,11 +30,18 @@ public class BoardServiceImpl implements BoardService {
 		mapper.insertSelectKey(board);
 	}
 
+//	@Override
+//	public List<BoardVO> getList() {
+//		
+//		log.info("getList.......이거는 BoardServiceImpl의 로그");
+//		return mapper.getList();
+//	}
+	
 	@Override
-	public List<BoardVO> getList() {
+	public List<BoardVO> getList(Criteria cri){
+		log.info("get List with criteria: "+cri);
 		
-		log.info("getList.......이거는 BoardServiceImpl의 로그");
-		return mapper.getList();
+		return mapper.getListWithPaging(cri);
 	}
 	
 	@Override
