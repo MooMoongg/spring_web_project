@@ -72,12 +72,10 @@ public class BoardController {
 		if (service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		return "redirect:/board/list"+cri.getListLink();
+		}
 		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		return "redirect:/board/list";
 
-	}
 
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
@@ -86,11 +84,9 @@ public class BoardController {
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		
-		return "redirect:/board/list";
+			return "redirect:/board/list"+cri.getListLink();
 		}
+
 
 	@GetMapping("/register")
 	public void register() {
