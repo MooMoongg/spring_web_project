@@ -50,11 +50,14 @@
 
 				<form id='operForm' action="/board/modify" method="get">
 					<input type='hidden' id='bno' name='bno'
-						value='<c:out value="${board.bno}"/>'>
-					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}" />'>
-					<input type='hidden' name='amount' value='<c:out value="${cri.amount}" />'>
-					<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}" />'>
-					<input type='hidden' name='type' value='<c:out value="${cri.type}" />'>
+						value='<c:out value="${board.bno}"/>'> <input
+						type='hidden' name='pageNum'
+						value='<c:out value="${cri.pageNum}" />'> <input
+						type='hidden' name='amount'
+						value='<c:out value="${cri.amount}" />'> <input
+						type='hidden' name='keyword'
+						value='<c:out value="${cri.keyword}" />'> <input
+						type='hidden' name='type' value='<c:out value="${cri.type}" />'>
 				</form>
 
 
@@ -71,6 +74,15 @@
 <!-- /.row -->
 
 <%@include file="../includes/footer.jsp"%>
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		console.log(replyService); // replyService 객체가 정상적으로 로드되었는지 확인
+	});
+</script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
