@@ -73,9 +73,86 @@
 </div>
 <!-- /.row -->
 
+
+
+
+<div class='row'>
+
+	<div class="col-lg-12">
+
+		<!--  /.panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> Reply
+			</div>
+
+			<!--  /.panel-heading-->
+			<div class="panel-body">
+
+				<ul class="chat">
+					<!-- start reply -->
+					<li class="left clearfix" data-rno='12'>
+						<div>
+							<div class="header">
+								<strong class="primary-font">user00</strong> <small
+									class="pull-right text-muted">2018-01-01 13:13</small>
+							</div>
+							<p>Good Job!</p>
+						</div>
+					</li>
+					<!-- end reply -->
+				</ul>
+				<!-- ./end ul -->
+			</div>
+			<!-- /.panel .chat-panel -->
+		</div>
+	</div>
+	<!--  ./ end row -->
+</div>
+
+
 <%@include file="../includes/footer.jsp"%>
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script>
+
+	$(document).ready(function(){
+		
+		var bnoValue = '<c:out value="${board.bno}"/>';
+		var replyUL = $(".chat");
+		
+			showList(1);
+			
+			function showList(page){
+				
+				replyService.getList({bno:bnoValue,page: page || 1}, function(list){
+					
+				var str = "";
+				if(list == null || list.length == 0){
+					replyUL.html("");
+					
+				return;
+				}
+				
+				for(var i = 0; len = list.length || 0; i < len; i++){
+				
+					str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
+					str += " <div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
+					str +="    <small class='pull-right text-muted'>" +list[i].replyDate+"</small></div>";
+					str +="    <p>"+list[i].reply+"</p></div></li>";
+				}
+				
+				replyUL.html(str);
+				
+			});//end function
+			
+	}//end showList
+			
+	});
+
+</script>
+
 
 <script>
 	console.log("===============");
@@ -83,6 +160,7 @@
 
 	var bnoValue = '<c:out value="${board.bno}"/>';
 
+	// reply List Test
 	 replyService.getList({bno:bnoValue, page:1}, function(list){
 		    
 		  for(var i = 0,  len = list.length||0; i < len; i++ ){
@@ -90,6 +168,7 @@
 		  }
 	});
 	
+	 //for replyService add test
 	replyService.add(
 
 	{
@@ -100,7 +179,32 @@
 		alert("RESULT: " + result);
 	});
 
+	 //23번 댓글 삭제 태스트
+	 replyService.remove(20, function(count){
+		 
+		 console.log(count);
+		 
+		 if(count == "success"){
+			 alert("REMOVE");
+		 }
+	 }, function(err){
+		 alert('ERROR...');
+	 });
 	
+	 
+	 // 19번 댓글 수정
+	 replyService.update({
+		rno : 22,
+		bno L bnoValue,
+		reply : "Modified Reply..."
+	 }, function(result){
+		 alert("수정완료......");
+	 });
+	 
+	 
+	 replyService.get(10, function(data){
+		 	console.log(data);
+	 });
 </script>
 
 
