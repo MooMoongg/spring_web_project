@@ -82,8 +82,14 @@
 
 		<!--  /.panel -->
 		<div class="panel panel-default">
+			<!-- <div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> Reply
+			</div> -->
+
 			<div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i> Reply
+				<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New
+					Reply</button>
 			</div>
 
 			<!--  /.panel-heading-->
@@ -111,7 +117,48 @@
 </div>
 
 
-<%@include file="../includes/footer.jsp"%>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Reply</label> <input class="form-control" name='reply'
+						value='New Reply!!!!'>
+				</div>
+				<div class="form-group">
+					<label>Replyer</label> <input class="form-control" name='replyer'
+						value='replyer'>
+				</div>
+				<div class="form-group">
+					<label>Reply Date</label> <input class="form-control"
+						name='replyDate' value='2018-01-01 13:13'>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
+				<button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
+				<button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
+				<button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+
+
+
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 
@@ -135,7 +182,7 @@
 				return;
 				}
 				
-				for(var i = 0; len = list.length || 0; i < len; i++){
+				for(var i = 0, len = list.length || 0; i < len; i++){
 				
 					str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
 					str += " <div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
@@ -148,6 +195,33 @@
 			});//end function
 			
 	}//end showList
+	
+	
+		    var modal = $(".modal");
+		    var modalInputReply = modal.find("input[name='reply']");
+		    var modalInputReplyer = modal.find("input[name='replyer']");
+		    var modalInputReplyDate = modal.find("input[name='replyDate']");
+		    
+		    var modalModBtn = $("#modalModBtn");
+		    var modalRemoveBtn = $("#modalRemoveBtn");
+		    var modalRegisterBtn = $("#modalRegisterBtn");
+		    
+		    $("#modalCloseBtn").on("click", function(e){
+		    	
+		    	modal.modal('hide');
+		    });
+		    
+		    $("#addReplyBtn").on("click", function(e){
+		      
+		      modal.find("input").val("");
+		      modalInputReplyDate.closest("div").hide();
+		      modal.find("button[id !='modalCloseBtn']").hide();
+		      
+		      modalRegisterBtn.show();
+		      
+		      $(".modal").modal("show");
+		      
+		    });
 			
 	});
 
@@ -180,7 +254,7 @@
 	});
 
 	 //23번 댓글 삭제 태스트
-	 replyService.remove(20, function(count){
+	 replyService.remove(5, function(count){
 		 
 		 console.log(count);
 		 
@@ -195,7 +269,7 @@
 	 // 19번 댓글 수정
 	 replyService.update({
 		rno : 22,
-		bno L bnoValue,
+		bno : bnoValue,
 		reply : "Modified Reply..."
 	 }, function(result){
 		 alert("수정완료......");
@@ -203,7 +277,7 @@
 	 
 	 
 	 replyService.get(10, function(data){
-		 	console.log(data);
+		 console.log("rno: " + data.rno);
 	 });
 </script>
 
@@ -235,3 +309,6 @@
 		});
 	});
 </script>
+
+
+<%@include file="../includes/footer.jsp"%>
