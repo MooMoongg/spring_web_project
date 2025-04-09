@@ -1,5 +1,7 @@
 package org.zerock.aop;
 
+import java.util.Arrays;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -40,7 +42,7 @@ public class LogAdvice {
 		long start = System.currentTimeMillis();
 		
 		log.info("Target: "+ pjp.getTarget());
-		log.info("Param: "+ Array.toSring(pjp.getArgs()));
+		log.info("Param: "+ Arrays.toString(pjp.getArgs()));
 		
 		//invoke method
 		Object result = null;

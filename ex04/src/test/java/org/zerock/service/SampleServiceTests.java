@@ -25,14 +25,14 @@ public class SampleServiceTests {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testAdd() throws Exception{
 		
 		log.info(service.doAdd("123", "456"));
 	}
 	
 	
-	@Test
+	//@Test
 	public void testAddError() throws Exception{
 		
 		log.info(service.doAdd("123", "ABC"));
